@@ -1,0 +1,9 @@
+{
+	"C_Cpp.errorSquiggles": "disabled",
+	"files.associations": {
+		"push_swap.h": "c",
+		"variant": "c",
+		"chrono": "c",
+		"random": "c"
+	}
+}
