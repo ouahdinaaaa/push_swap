@@ -6,7 +6,7 @@
 /*   By: ayael-ou <ayael-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 16:44:26 by ayael-ou          #+#    #+#             */
-/*   Updated: 2023/02/16 14:25:16 by ayael-ou         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:16:03 by ayael-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,26 +107,9 @@ char	*get_next_line(int fd, t_dataa *data, int boolean)
 {
 	char		*buff;
 
-	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buff = malloc(sizeof(char) * (BUFFER_SIZE) + 1);
 	if (!buff)
 		return (NULL);
 	data->ret = 1;
 	return (ft_retry(fd, &buff, data, boolean));
 }
-
-
-//char	*get_next_line(int fd, t_dataa *data)
-//{
-//	char	*buff;
-//	char	*line;
-
-//	buff = malloc(sizeof(char) * BUFFER_SIZE + 1);
-//	if (!buff)
-//		return (NULL);
-//	data->ret = 1;
-
-//	while (data->ret && ft_strchr(line, '\n'))
-//	{
-
-//	}
-//}

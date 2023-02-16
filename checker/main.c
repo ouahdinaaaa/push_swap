@@ -6,7 +6,7 @@
 /*   By: ayael-ou <ayael-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:33:29 by ayael-ou          #+#    #+#             */
-/*   Updated: 2023/02/16 14:16:16 by ayael-ou         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:44:36 by ayael-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	main(int argc, char **argv)
 	create_pile(data, argc, argv);
 	if (check_doublon(&data->pile_a) == 1 || check_node(data->pile_a) == 0)
 		return (free_data(data), 1);
-	retrieve_arg(0, &data->pile_a, &data->pile_b, data);
+	retrieve_arg(0, data);
 	check_pilea(data->pile_a, data);
-	free_data(data);
+	//free_data(data);
 	return (0);
 }
