@@ -6,7 +6,7 @@
 /*   By: ayael-ou <ayael-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:16:27 by ayael-ou          #+#    #+#             */
-/*   Updated: 2023/02/16 09:51:54 by ayael-ou         ###   ########.fr       */
+/*   Updated: 2023/02/17 16:09:01 by ayael-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,19 @@ t_pile	*last(t_pile *pile)
 
 void	create_pile(t_data *data, int argc, char **argv)
 {
-	int		i;
-	int		nb;
-	t_pile	*node;
+	int				i;
+	long int		nb;
+	t_pile			*node;
 
 	i = argc - 1 ;
 	while (i >= 1)
 	{
-		nb = ft_nb_atoi(argv[i]);
+		nb = ft_nb_atoi(argv[i], data);
 		node = new(nb);
-		if ((nb > 2147483647 || nb < -2147483648) || node == NULL)
+		if (node == NULL)
 		{
-			free(data);
-			ft_putstr("ERROR\n");
+			write(2, "ERROR\n", 6);
+			free_data(data);
 			exit(0);
 		}
 		ft_add(&data->pile_a, node);

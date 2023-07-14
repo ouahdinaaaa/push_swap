@@ -6,7 +6,7 @@
 /*   By: ayael-ou <ayael-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 17:10:13 by ayael-ou          #+#    #+#             */
-/*   Updated: 2023/02/15 12:31:31 by ayael-ou         ###   ########.fr       */
+/*   Updated: 2023/07/14 15:08:57 by ayael-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,12 @@ void	counter_pileb(t_pile *pile, int index, t_bestmove *best)
 
 t_bestmove	counter_calc(t_pile *ptr, t_pile *ptrb)
 {
-	t_pile		*pilea;
 	t_pile		*pileb;
 	t_bestmove	*bestmove;
 	t_bestmove	test;
 	int			i;
 
 	bestmove = ft_calloc(1, (sizeof(t_bestmove) * ft_listsize(ptrb)));
-	pilea = ptr;
 	pileb = ptrb;
 	i = 0;
 	while (pileb)

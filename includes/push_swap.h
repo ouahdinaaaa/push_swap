@@ -6,14 +6,14 @@
 /*   By: ayael-ou <ayael-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 14:56:38 by ayael-ou          #+#    #+#             */
-/*   Updated: 2023/02/15 11:54:22 by ayael-ou         ###   ########.fr       */
+/*   Updated: 2023/02/19 17:12:57 by ayael-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct s_pile
 {
@@ -38,7 +38,7 @@ typedef struct s_data_push
 	t_pile		*pile_b;
 }				t_data;
 
-int				ft_nb_atoi(const char *str);
+int				ft_nb_atoi(const char *str, t_data *data);
 int				check_doublon(t_pile **pile_a);
 int				check_node(t_pile *pilea);
 

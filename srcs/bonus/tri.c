@@ -6,7 +6,7 @@
 /*   By: ayael-ou <ayael-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:29:43 by ayael-ou          #+#    #+#             */
-/*   Updated: 2023/02/16 09:49:37 by ayael-ou         ###   ########.fr       */
+/*   Updated: 2023/07/14 15:10:26 by ayael-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,6 @@ void	small_push(t_pile **pile_a, t_pile **pile_b)
 
 void	tri_5(t_pile **pile_a, t_pile **pile_b)
 {
-	int	nb;
-
-	nb = 5;
 	small_push(pile_a, pile_b);
 	small_push(pile_a, pile_b);
 	tri_3(pile_a);

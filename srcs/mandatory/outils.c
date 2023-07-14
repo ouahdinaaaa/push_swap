@@ -6,13 +6,13 @@
 /*   By: ayael-ou <ayael-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:21:46 by ayael-ou          #+#    #+#             */
-/*   Updated: 2023/02/16 10:23:44 by ayael-ou         ###   ########.fr       */
+/*   Updated: 2023/02/19 18:33:58 by ayael-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_nb_atoi(const char *str)
+int	ft_nb_atoi(const char *str, t_data *data)
 {
 	int			sign;
 	long int	num;
@@ -28,16 +28,16 @@ int	ft_nb_atoi(const char *str)
 		sign *= -1;
 		str++;
 	}
+	if (!*str)
+		return (write(2, "ERROR\n", 6), free_data(data), exit(0), 1);
 	while (*str >= '0' && *str <= '9')
 	{
-		num = (num * 10) + (*str - '0');
-		str++;
+		num = (num * 10) + (*str++ - '0');
+		if (num > 2147483647 || num < -2147483648)
+			return (write(2, "ERROR\n", 6), free_data(data), exit(0), 1);
 	}
 	if (*str || sign == 0)
-	{
-		ft_putstr("ERROR\n");
-		exit(0);
-	}
+		return (write(2, "ERROR\n", 6), free_data(data), exit(0), 1);
 	return (num * sign);
 }
 
@@ -53,7 +53,7 @@ int	check_doublon(t_pile **pile_a)
 		while (tmp)
 		{
 			if (tmp_2->nb == tmp->nb)
-				return (ft_putstr("ERROR\nDoublon\n"), 1);
+				return (write(2, "ERROR\n", 6), 1);
 			tmp = tmp->next;
 		}
 		tmp_2 = tmp_2->next;
@@ -76,7 +76,6 @@ int	check_node(t_pile *pilea)
 		nb_pilea = tmp->nb;
 		tmp = tmp->next;
 	}
-	ft_putstr("ERROR\nPile triee\n");
 	return (0);
 }
 

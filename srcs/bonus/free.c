@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayael-ou <ayael-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 17:33:29 by ayael-ou          #+#    #+#             */
-/*   Updated: 2023/02/16 17:44:36 by ayael-ou         ###   ########.fr       */
+/*   Created: 2023/01/27 18:07:45 by ayael-ou          #+#    #+#             */
+/*   Updated: 2023/02/17 16:09:37 by ayael-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	free_pile(t_pile *pile)
 {
-	t_data	*data;
+	t_pile	*first;
 
-	data = ft_calloc(1, sizeof(t_data));
-	if (argc < 2)
-		return (free_data(data), ft_putstr("ERROR\n"), 1);
-	create_pile(data, argc, argv);
-	if (check_doublon(&data->pile_a) == 1 || check_node(data->pile_a) == 0)
-		return (free_data(data), 1);
-	retrieve_arg(0, data);
-	check_pilea(data->pile_a, data);
-	//free_data(data);
-	return (0);
+	while (pile)
+	{
+		first = pile -> next;
+		free(pile);
+		pile = first;
+	}
+}
+
+void	free_data(t_data *data)
+{
+	if (data->pile_b)
+		free_pile(data->pile_b);
+	if (data->pile_a)
+		free_pile(data->pile_a);
+	if (data)
+	{
+		free(data);
+		data = NULL;
+	}
 }

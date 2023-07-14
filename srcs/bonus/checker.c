@@ -6,19 +6,19 @@
 /*   By: ayael-ou <ayael-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 15:25:04 by ayael-ou          #+#    #+#             */
-/*   Updated: 2023/02/16 17:44:51 by ayael-ou         ###   ########.fr       */
+/*   Updated: 2023/02/19 12:48:51 by ayael-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	check_pilea(t_pile *pile, t_data *data)
+void	check_pilea(t_pile *pile, t_pile *pile_b, t_data *data)
 {
 	int	i;
 	int	size;
 
-	if (!pile)
-		return ;
+	if (!pile || pile_b)
+		return (free_data(data), write(1, "KO\n", 3), exit(0));
 	i = 0;
 	size = ft_listsize(pile);
 	while (pile->next && i < size)
@@ -29,39 +29,55 @@ void	check_pilea(t_pile *pile, t_data *data)
 			free_data(data);
 			exit(0);
 		}
-		i++;
 		pile = pile->next;
+		i++;
 	}
 	write (1, "OK\n", 3);
 	free_data(data);
 }
 
+void	mouv2(const char *str, t_data *data, t_dataa *dataa)
+{
+	if (!str)
+		return (ft_freee(dataa, 0), free_data(data),
+			write(1, "KO\n", 3), exit(0));
+	if (!ft_strcmp(str, "ra\n"))
+		mouv_ra_rb_rr(&data->pile_a, &data->pile_b, 'c');
+	else if (!ft_strcmp(str, "print_pileB\n"))
+		print_pile(data->pile_b, 'b');
+	else if (!ft_strcmp(str, "print_pileA\n"))
+		print_pile(data->pile_a, 'a');
+	else if (!ft_strcmp(str, "rb\n"))
+		mouv_ra_rb_rr(&data->pile_a, &data->pile_b, 'd');
+	else if (!ft_strcmp(str, "rra\n"))
+		mouv_rra_rrb_rrr(&data->pile_a, &data->pile_b, 'c');
+	else if (!ft_strcmp(str, "rrb\n"))
+		mouv_rra_rrb_rrr(&data->pile_a, &data->pile_b, 'd');
+}
+
 int	mouvv(const char *str, t_data *data, t_dataa *dataa)
 {
-	if (!ft_strcmp(str, "ra\n"))
-		mouv_ra_rb_rr(&data->pile_a, &data->pile_b, 'a');
-	else if (!ft_strcmp(str, "rb\n"))
-		mouv_ra_rb_rr(&data->pile_a, &data->pile_b, 'b');
-	else if (!ft_strcmp(str, "rra\n"))
-		mouv_rra_rrb_rrr(&data->pile_a, &data->pile_b, 'a');
-	else if (!ft_strcmp(str, "rrb\n"))
-		mouv_rra_rrb_rrr(&data->pile_a, &data->pile_b, 'b');
+	if (!ft_strcmp(str, "ra\n") || !ft_strcmp(str, "print_pileB\n")
+		|| !ft_strcmp(str, "print_pileA\n") || !ft_strcmp(str, "rb\n")
+		|| !ft_strcmp(str, "rra\n") || !ft_strcmp(str, "rrb\n"))
+		mouv2(str, data, dataa);
 	else if (!ft_strcmp(str, "rr\n"))
-		mouv_ra_rb_rr(&data->pile_a, &data->pile_b, 'r');
+		mouv_ra_rb_rr(&data->pile_a, &data->pile_b, 'u');
 	else if (!ft_strcmp(str, "rrr\n"))
-		mouv_rra_rrb_rrr(&data->pile_a, &data->pile_b, 'r');
+		mouv_rra_rrb_rrr(&data->pile_a, &data->pile_b, 'u');
 	else if (!ft_strcmp(str, "sa\n"))
-		mouv_sa_sb_ss(&data->pile_a, &data->pile_b, 'a');
+		mouv_sa_sb_ss(&data->pile_a, &data->pile_b, 'c');
 	else if (!ft_strcmp(str, "sb\n"))
-		mouv_sa_sb_ss(&data->pile_a, &data->pile_b, 'b');
+		mouv_sa_sb_ss(&data->pile_a, &data->pile_b, 'd');
 	else if (!ft_strcmp(str, "ss\n"))
-		mouv_sa_sb_ss(&data->pile_a, &data->pile_b, 's');
+		mouv_sa_sb_ss(&data->pile_a, &data->pile_b, 'n');
 	else if (!ft_strcmp(str, "pa\n"))
-		mouv_pa_pb(&data->pile_a, &data->pile_b, 'a');
+		mouv_pa_pb(&data->pile_a, &data->pile_b, 'c');
 	else if (!ft_strcmp(str, "pb\n"))
-		mouv_pa_pb(&data->pile_a, &data->pile_b, 'b');
+		mouv_pa_pb(&data->pile_a, &data->pile_b, 'd');
 	else
-		return (ft_freee(dataa, 0), check_pilea(data->pile_a, data), exit(0), 1);
+		return (ft_freee(dataa, 0), free_data(data),
+			write(1, "KO\n", 3), exit(0), 1);
 	return (0);
 }
 
@@ -73,7 +89,10 @@ int	ft_freee(t_dataa *data, int fd)
 	if (data->res)
 		free(data->res);
 	if (data)
+	{
 		free(data);
+		data = NULL;
+	}
 	return (0);
 }
 
